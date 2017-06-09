@@ -1,8 +1,6 @@
 import React,{PropTypes} from 'react';
 import Product from './product.js';
 import InteractionButton from './interactionbutton.js';
-
-
 import {
   AppRegistry,
   asset,
@@ -22,7 +20,7 @@ class ShopUI extends React.Component {
       <View style={{
         transform: [{translate: [0, 0.5, -3]}],
       }}>
-      <Sound volume={70} source={asset('shop_music.mp3')}
+
       style={{
         transform: [{ translate: [0,1,-3] }]
       }}/>
