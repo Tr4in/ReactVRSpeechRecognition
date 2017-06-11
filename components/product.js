@@ -22,10 +22,11 @@ export default class Product extends React.Component {
       try {
       this.setState({ interactionActive: true });
       console.log('Active');
-      var output = await this.state.annyang.start()
 
-      console.log(output);
-    }catch(e) {console.log(e);}
+      var output = await this.state.annyang.start()
+      console.log("Output:" + output);
+
+    } catch(e) { console.log(e); }
     }
 
     onGazeOut() {

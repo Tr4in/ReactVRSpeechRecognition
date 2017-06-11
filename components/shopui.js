@@ -21,10 +21,6 @@ class ShopUI extends React.Component {
         transform: [{translate: [0, 0.5, -3]}],
       }}>
 
-      style={{
-        transform: [{ translate: [0,1,-3] }]
-      }}/>
-
       <Text style={{
         position: 'absolute',
         fontSize: 0.5,

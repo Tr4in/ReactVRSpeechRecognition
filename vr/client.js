@@ -31,12 +31,14 @@ function init(bundle, parent, options) {
 
 export default class Annyang extends Module {
   _rnctx: ReactNativeContext;
+  recognition: Object;
 
   constructor() {
     super("Annyang")
 
     // Variables
     this._rnctx = null;
+
     var commands = {'Show me dogs': function() { alert("Success") }}
 
     if(annyang)
@@ -51,22 +53,43 @@ export default class Annyang extends Module {
   }
 
   $start(resolve,reject) {
-    annyang.start()
+    this.startListening();
+
+    // Get the speech recognition from annyang
+    this.recognition = annyang.getSpeechRecognizer();
+
+    var thisRef = this;
+
+    // Override method onresult
+    this.recognition.onresult = function(event) {
+
+      // Get the speech result
+      var SpeechResults = event.results[event.resultIndex];
+
+      if(thisRef._rnctx !== 'undefined')
+        thisRef._rnctx.invokeCallback(resolve, [SpeechResults[0].transcript]);
+
+    }
+
+  }
+
+
+  startListening() {
+
+    // Stop annyang if its listening
+    if(annyang.isListening) {
+      stop();
+    }
+
+
+    // Start again
     console.log("Start");
-    annyang.debug();
-
-    if(this._rnctx !== 'undefined')
-      this._rnctx.invokeCallback(resolve, [annyang.returnFirstResult()]);
-
+    annyang.start();
   }
 
   stop() {
     annyang.abort()
     console.log("Stop")
-  }
-
-  showAlert() {
-    alert("Hello")
   }
 
 }
