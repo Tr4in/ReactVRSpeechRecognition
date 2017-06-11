@@ -52,7 +52,6 @@
   var debugStyle = 'font-weight: bold; color: #00f;';
   var pauseListening = false;
   var isListening = false;
-  var correctPhrase = "Nothing";
 
   // The command matching code is a modified version of Backbone.Router by Jeremy Ashkenas, under the MIT license.
   var optionalParam = /\s*\((.*?)\)\s*/g;
@@ -121,7 +120,6 @@
         var result = currentCommand.command.exec(commandText);
         if (result) {
           var parameters = result.slice(1);
-          correctPhrase = result;
           if (debugState) {
             logMessage('command matched: %c'+currentCommand.originalPhrase, debugStyle);
             if (parameters.length) {
@@ -162,11 +160,6 @@
      * @deprecated
      * @see [Commands Object](#commands-object)
      */
-
-     returnFirstResult: function() {
-        return correctPhrase;
-     },
-
 
     init: function(commands, resetCommands = true) {
       // Abort previous instances of recognition already running
