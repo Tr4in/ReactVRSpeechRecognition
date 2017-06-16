@@ -1,72 +1,38 @@
 import React,{PropTypes} from 'react';
-import Product from './product.js';
-import InteractionButton from './interactionbutton.js';
+import PakIcon from './pakicon.js';
 import {
   AppRegistry,
   asset,
   Text,
   View,
   Plane,
-  Sound,
-  Sphere,
-  Box,
-  NativeModules,
 } from 'react-vr';
 
-class ShopUI extends React.Component {
+export default class ShopUI extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      iconsActive: true
+    };
+  }
 
   render() {
+
     return (
       <View style={{
-        transform: [{translate: [0, 0.5, -3]}],
+        transform: [{ translate: [0, 0.4, -2.7] }],
       }}>
 
-      <Text style={{
-        position: 'absolute',
-        fontSize: 0.5,
-        fontWeight: 'bold',
-        transform: [{translate: [0, 1, 0]}],
-        layoutOrigin: [0.5, 0]
-      }}>
-        MillientX VRSHOP
-      </Text>
-
-      <Text style={{
-        position: 'absolute',
-        fontSize: 0.5,
-        fontWeight: 'bold',
-        transform: [{translate: [0, 1.5, 0]}],
-        layoutOrigin: [0.5, 0]
-      }}>
-
-      </Text>
-
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          width: 4,
-          alignItems: 'stretch',
-          layoutOrigin: [0.6, 0.0]
-        }}>
-
-          <View style={{ margin: 0.2 }}>
-            <Product x={0} name="Paper" />
-          </View>
-
-          <View style={{ margin: 0.2 }}>
-            <Product x={2} name="LostPaki" />
-          </View>
-
+        <View onEnter={ () => this.setState({ iconsActive: true }) } onExit={ () => this.setState({ iconsActive: false }) }>
+          <PakIcon x={0} enableSpeaking={ this.state.iconsActive } />
         </View>
 
-        <Plane dimWidth={10} dimHeight={10} style={{
+        <Plane dimWidth={10} dimHeight={10} texture={ asset("texture.png") } style={{
           color: 'gray',
-          transform: [{ translate: [-2.5,-0.5,0]},
-        {rotateX: -90}]
+          transform: [{ translate: [-2.5, -1.5, 0]}, {rotateX: -90}]
         }}/>
       </View>
     );
   }
 };
-
-export default ShopUI
