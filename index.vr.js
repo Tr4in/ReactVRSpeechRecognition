@@ -15,7 +15,7 @@ export default class VRShop extends React.Component {
   render() {
     return (
       <View>
-        <Pano source={asset('milkway.jpg')}/>
+        <Pano source={asset('newbackground.jpg')} />
         <ShopUI />
       </View>
     );
