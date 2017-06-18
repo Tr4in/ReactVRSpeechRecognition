@@ -16,7 +16,8 @@ export default class SpeechRecognition extends React.Component {
       this.state = {
         interactionActive: true,
         annyang: NativeModules.Annyang,
-        animationValue: new Animated.Value(0)
+        animationValue: new Animated.Value(0),
+        imageSource: 'microphone.png'
       }
     }
 
@@ -31,12 +32,15 @@ export default class SpeechRecognition extends React.Component {
       try {
         console.log('Active');
 
+        // Load the emoji image
+        this.setState({ imageSource: 'listenemoji.png' });
+
         // Start capturing voice
         var output = await this.state.annyang.start();
 
         if(output) {
           this.setState({ interactionActive: false });
-          this.props.outputHandler(output);
+          this.props.outputHandler(output.toUpperCase());
         }
 
         // Stop
@@ -50,12 +54,11 @@ export default class SpeechRecognition extends React.Component {
 
       if(this.state.interactionActive) {
         output = (
-          <Animated.Image source={ asset('microphone.png') } style={{
+          <Animated.Image source={ asset(this.state.imageSource) } style={{
             width: 0.5,
             height: 0.6,
             overflow: 'visible',
-            borderRadius: 0.2,
-            transform: [{ translate: [ this.props.x, 0, 0 ] }]
+            transform: [{ translate: [ this.props.x, -1.35, 0 ] }]
           }} />
         );
       }

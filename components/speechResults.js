@@ -18,13 +18,13 @@ export default class SpeechResults extends React.Component {
 
     return (
       <View style={{
-        transform: [{ translate: [ 0.2, -0.8, 0 ] }],
+        transform: [{ translate: [ -0.1, 0.5, 0 ] }],
       }}>
 
         <Text style={{
           color: 'red',
           fontWeight: 'bold',
-          fontSize: 0.3,
+          fontSize: 0.5,
           textAlign: 'center',
           layoutOrigin: [ 0, 0 ]
         }}>
